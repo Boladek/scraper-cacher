@@ -29,21 +29,33 @@
 ## Installation
 
 ```bash
-$ npm install
+$ yarn
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+$ yarn start
 
 # watch mode
-$ npm run start:dev
+$ yarn start:dev
 
 # production mode
-$ npm run start:prod
+$ yarn start:prod
 ```
+
+# USING It in the browser
+
+```bash
+# go to localhost:3000/graphql
+$ fill in this details ===> mutation {
+  parseUrl (parseUrlData: {url : ${any Url you like}}){
+    largestImage,
+    title,
+    description
+  }
+}
 
 ## Test
 
