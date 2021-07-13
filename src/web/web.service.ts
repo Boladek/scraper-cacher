@@ -49,6 +49,8 @@ export class WebService {
         }
       });
 
+        console.log('hi');
+
       let allRequests: any = await Promise.allSettled(requests);
       allRequests = allRequests.filter((item) => item.value !== undefined);
       allRequests = allRequests.sort((a, b) => b.value.length - a.value.length);
