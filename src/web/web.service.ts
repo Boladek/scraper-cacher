@@ -59,6 +59,7 @@ export class WebService {
         description: description || 'No description available',
         largestImage: allRequests[0].value.url || 'No images available',
       };
+      this.webDetails.push(result);
       return result;
     } catch (error) {
       console.log(error);

@@ -1,10 +1,10 @@
 {
-  "name": "nestjs-graphql",
+  "name": "scraper-cacher",
   "version": "0.0.1",
-  "description": "Mubarak Adekunle",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "description": "A simple web service that parses a url and return meta data containing title, description and largestImage from that url",
+  "author": "Mubarak Adekunle",
+  "public": true,
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
