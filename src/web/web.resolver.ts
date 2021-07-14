@@ -9,7 +9,9 @@ export class WebResolver {
   constructor(private readonly webService: WebService) {}
 
   @Mutation(() => WebDetails)
-  parseUrl(@Args('parseUrlData') urlToBeParsedInput: UrlToBeParsedInput ): Promise<WebDetails> {
+  parseUrl(
+    @Args('parseUrlData') urlToBeParsedInput: UrlToBeParsedInput,
+  ): Promise<WebDetails> {
     return this.webService.parseUrl(urlToBeParsedInput);
   }
 
