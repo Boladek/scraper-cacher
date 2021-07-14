@@ -29,21 +29,33 @@
 ## Installation
 
 ```bash
-$ npm install
+$ yarn
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+$ yarn start
 
 # watch mode
-$ npm run start:dev
+$ yarn start:dev
 
 # production mode
-$ npm run start:prod
+$ yarn start:prod
 ```
+
+# USING It in the browser
+
+```bash
+# go to localhost:3000/graphql
+$ fill in this details ===> mutation {
+  parseUrl (parseUrlData: {url : ${any Url you like}}){
+    largestImage,
+    title,
+    description
+  }
+}
 
 ## Test
 
@@ -64,7 +76,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Author - [Mubarak Bolaji](bmubarak88@gmail.com)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
 
