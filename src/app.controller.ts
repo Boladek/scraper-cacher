@@ -9,7 +9,7 @@ export class AppController {
 
   @Get('cache')
   getSimpleString(){
-
+    const value = await this.cacheManager.get('my-key')
     if(value) {
       return {
         data: value,

@@ -1,6 +1,9 @@
 {
   "name": "scraper-cacher",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "engines": {
+    "node": "14.x"
+  },
   "description": "A simple web service that parses a url and return meta data containing title, description and largestImage from that url",
   "author": "Mubarak Adekunle",
   "public": true,
