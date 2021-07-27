@@ -26,6 +26,5 @@ export class WebResolver {
     @Args() getSingleWebDetailsArgs: GetSingleWebDetailsArgs,
   ): WebDetails {
     return;
-    return this.webService.getSingleWebDetails(getSingleWebDetailsArgs);
   }
 }

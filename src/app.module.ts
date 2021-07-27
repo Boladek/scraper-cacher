@@ -1,4 +1,5 @@
-import { Module } from '@nestjs/common';
+import { Module, CacheModule } from '@nestjs/common';
+import * as redisStore from 'cache-manager-redis-store';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { WebModule } from './web/web.module';
@@ -9,7 +10,12 @@ import { GraphQLModule } from '@nestjs/graphql';
     GraphQLModule.forRoot({
       autoSchemaFile: true,
     }),
-    WebModule,
+    WebModule
+    // CacheModule.register({
+    //   store: redisStore,
+    //   host: 'localhost',
+    //   port: 6379
+    // })
   ],
   controllers: [],
   providers: [],

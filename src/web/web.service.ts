@@ -26,6 +26,7 @@ export class WebService {
       this.getSingleWebDetails({ urlId }),
     );
   }
+  
   public async parseUrl(
     urlToBeParsedInput: UrlToBeParsedInput,
   ): Promise<WebDetails> {
@@ -36,13 +37,15 @@ export class WebService {
       const html = cheerio.load(page.data, {}).html();
       const webInfo = new JSDOM(html);
       const { window } = webInfo;
-      const title = window.document.querySelector('title').textContent;
+      const videos = window.document.querySelectorAll('iframe');
+      console.log(videos, "hi");
+      const title = window.document.querySelector('title') ? window.document.querySelector('title').textContent : 'title'
       const description = $('meta[name="description"]').attr('content');
       const image = window.document.querySelectorAll('img');
-
       image.forEach((img) => {
         images.push(img.getAttribute('src'));
       });
+      
       const requests = images.map(async (item) => {
         if (item !== null) {
           return await probe(item);
@@ -50,19 +53,22 @@ export class WebService {
       });
 
       let allRequests: any = await Promise.allSettled(requests);
-      allRequests = allRequests.filter((item) => item.value !== undefined);
-      allRequests = allRequests.sort((a, b) => b.value.length - a.value.length);
+      allRequests = allRequests.filter((item: any) => item.status !== 'rejected');
+      allRequests = allRequests.sort((a: any, b: any) => b.value.length - a.value.length);
 
       const result: WebDetails = {
         urlId: uuidv4(),
-        title: title,
+        title,
         description: description || 'No description available',
-        largestImage: allRequests[0].value.url || 'No images available',
+        largestImage: ( allRequests.length > 0 && allRequests[0].value.url) || 'No image available'
       };
+
       this.webDetails.push(result);
       return result;
-    } catch (error) {
-      console.log(error);
+    } 
+    catch (error) {
+      console.log(error.message);
+      return error;
     }
   }
 }
