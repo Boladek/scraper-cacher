@@ -14,3 +14,9 @@ export class WebDetails {
   @Field()
   largestImage: string;
 }
+
+@ObjectType()
+export class CacheDetails {
+  @Field()
+  details: string;
+}

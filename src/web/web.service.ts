@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable , Inject, CACHE_MANAGER} from '@nestjs/common';
+import {Cache} from 'cache-manager';
 import { UrlToBeParsedInput } from './dto/parse-web.dto';
-import { WebDetails } from './model/web-details.interface';
+import { CacheDetails, WebDetails } from './model/web-details.interface';
 import Axios from 'axios';
 import cheerio from 'cheerio';
 import { JSDOM } from 'jsdom';
@@ -8,10 +9,13 @@ import { v4 as uuidv4 } from 'uuid';
 import * as probe from 'probe-image-size';
 import { GetWebDetailsArgs } from './dto/get-web-details.dto';
 import { GetSingleWebDetailsArgs } from './dto/get-single-web-details.dto';
+import { GetUrlDetailsArgs } from './dto/get-url-cache-details.dto';
+import { ThisExpression } from 'ts-morph';
 
 @Injectable()
 export class WebService {
   private webDetails: WebDetails[] = [];
+  constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
   public getSingleWebDetails(
     getSingleWebDetailsArgs: GetSingleWebDetailsArgs,
@@ -25,6 +29,26 @@ export class WebService {
     return getWebDetailsArgs.urlIds.map((urlId) =>
       this.getSingleWebDetails({ urlId }),
     );
+  }
+
+  public async cacheUrl(getUrlArgs: GetUrlDetailsArgs): Promise<string> { 
+    try{
+      const {url} = getUrlArgs;
+      const {data} = await Axios.get(url);
+      // console.log(data, 'data')
+      const cached: string = await this.cacheManager.get(url);
+      console.log(cached, 'cached')
+      if(cached){
+        return cached;
+      } else {
+        const unCached: string= await this.cacheManager.set(url, data, {ttl: 300});
+        console.log(data, 'unCached')
+        return data;
+      }
+    }catch(error){
+     console.log(error);
+     return error.message;
+    }
   }
   
   public async parseUrl(
