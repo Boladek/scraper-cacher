@@ -39,6 +39,10 @@ $ yarn
 ## Running the app
 
 ```bash
+#start your redis server
+$ redis server
+
+```bash
 # development
 $ yarn start
 
