@@ -8,8 +8,8 @@ export class AppController {
   fakeValue = 'my fake value';
 
   @Get('cache')
-  async getSimpleString(){
-    const value = await this.cacheManager.get('my-key')
+  getSimpleString(){
+
     if(value) {
       return {
         data: value,
