@@ -28,6 +28,10 @@
 
 ## Installation
 
+git clone 'https://github.com/Boladek/scraper-cacher.git'
+
+cd scraper-cacher/
+
 ```bash
 $ yarn
 ```
@@ -48,26 +52,19 @@ $ yarn start:prod
 # USING It in the browser
 
 ```bash
-# go to localhost:3000/graphql
-$ fill in this details ===> mutation {
-  parseUrl (parseUrlData: {url : ${any Url you like}}){
-    largestImage,
-    title,
-    description
-  }
-}
+go to localhost:3000/graphql
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ yarn test
 
 # e2e tests
-$ npm run test:e2e
+$ yarn test:e2e
 
 # test coverage
-$ npm run test:cov
+$ yarn test:cov
 ```
 
 ## Support
@@ -77,8 +74,8 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## Stay in touch
 
 - Author - [Mubarak Bolaji](bmubarak88@gmail.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
+- Heroku - ['https://scraper-cacher-haggle-x.herokuapp.com/']
 
 ## License
 
