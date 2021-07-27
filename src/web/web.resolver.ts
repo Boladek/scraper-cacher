@@ -37,7 +37,7 @@ export class CacheResolver {
   constructor(private readonly webService: WebService){}
 
   @Query(() => CacheDetails, { name: 'cache'})
-  getCacheDetails(@Args() getUrlDetailsArgs: GetUrlDetailsArgs): Promise<string> {
+  getCacheDetails(@Args() getUrlDetailsArgs: GetUrlDetailsArgs): Promise<CacheDetails> {
     return this.webService.cacheUrl(getUrlDetailsArgs);
   }
 }

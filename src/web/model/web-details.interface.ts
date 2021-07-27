@@ -18,5 +18,8 @@ export class WebDetails {
 @ObjectType()
 export class CacheDetails {
   @Field()
+  cached: string;
+
+  @Field()
   details: string;
 }

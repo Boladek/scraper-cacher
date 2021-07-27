@@ -31,19 +31,24 @@ export class WebService {
     );
   }
 
-  public async cacheUrl(getUrlArgs: GetUrlDetailsArgs): Promise<string> { 
+  public async cacheUrl(getUrlArgs: GetUrlDetailsArgs): Promise<CacheDetails> { 
     try{
       const {url} = getUrlArgs;
       const {data} = await Axios.get(url);
-      // console.log(data, 'data')
       const cached: string = await this.cacheManager.get(url);
-      console.log(cached, 'cached')
       if(cached){
-        return cached;
+        const result: CacheDetails = {
+          cached: 'true',
+          details: cached
+        }
+        return result;
       } else {
-        const unCached: string= await this.cacheManager.set(url, data, {ttl: 300});
-        console.log(data, 'unCached')
-        return data;
+        await this.cacheManager.set(url, data, {ttl: 300});
+        const result: CacheDetails = {
+          cached: 'false',
+          details: data
+        }
+        return result;
       }
     }catch(error){
      console.log(error);
